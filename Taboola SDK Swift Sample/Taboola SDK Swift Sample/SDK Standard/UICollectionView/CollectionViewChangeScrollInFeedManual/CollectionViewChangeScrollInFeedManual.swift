@@ -113,6 +113,7 @@ extension CollectionViewChangeScrollInFeedManual: UICollectionViewDataSource, UI
             print("did finish scrolling taboola")
             taboolaFeed.scrollEnable = false
             collectionView.isScrollEnabled = true
+            taboolaFeed.releaseScroll()
         }
     }
     
