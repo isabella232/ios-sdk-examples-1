@@ -37,7 +37,6 @@ class FetchOnDemandPageViewController: UIPageViewController {
                 }
 
             }
-    //TaboolaJS.sharedInstance()?.unregisterWebView(pageContentViewController.webView, completion: nil)
         }
     
     func viewController(at index: Int) -> PageContentViewController? {

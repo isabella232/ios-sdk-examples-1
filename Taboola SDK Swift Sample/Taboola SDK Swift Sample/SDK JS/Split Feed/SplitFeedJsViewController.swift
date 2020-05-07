@@ -32,6 +32,10 @@ class SplitFeedJsViewController: UIViewController {
         let appHtml = try String.init(contentsOfFile: htmlPath, encoding: .utf8)
         webView.loadHTMLString(appHtml, baseURL: URL(string: "https://cdn.taboola.com/mobile-sdk/init/"))
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        TaboolaJS.sharedInstance()?.unregisterWebView(webView, completion: nil)
+    }
 }
 
 extension SplitFeedJsViewController: TaboolaJSDelegate {
