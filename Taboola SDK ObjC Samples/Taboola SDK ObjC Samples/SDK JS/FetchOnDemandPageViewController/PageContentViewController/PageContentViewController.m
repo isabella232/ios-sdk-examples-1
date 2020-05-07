@@ -11,7 +11,6 @@
 #import <WebKit/WebKit.h>
 
 @interface PageContentViewController () <TaboolaJSDelegate>
-@property (weak, nonatomic) IBOutlet WKWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *indexLabel;
 @property (nonatomic) BOOL didLoadTaboola;
 

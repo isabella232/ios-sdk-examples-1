@@ -27,15 +27,14 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+        [[TaboolaJS sharedInstance] unregisterWebView:self.webView completion:nil];
+}
+
 - (void)loadExamplePage:(UIView*)webView {
     NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"sampleContentPageSplitFeed" ofType:@"html"];
     NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     [self.webView loadHTMLString:appHtml baseURL:[NSURL URLWithString:@"http://cdn.taboola.com/mobile-sdk/init/"]];
 }
-
--(void)dealloc {
-    [[TaboolaJS sharedInstance] unregisterWebView:self.webView completion:nil];
-}
-
 
 @end

@@ -8,6 +8,8 @@
 
 #import "FetchOnDemandPageViewController.h"
 #import "PageContentViewController.h"
+#import <TaboolaSDK/TaboolaSDK.h>
+
 
 @interface FetchOnDemandPageViewController () <UIPageViewControllerDataSource>
 
@@ -43,6 +45,15 @@
     return pageContentViewController;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+        for (PageContentViewController *pageContentViewController in self.viewControllers){
+            
+            [[TaboolaJS sharedInstance] unregisterWebView:pageContentViewController.webView completion:nil];
+        }
+    }
+}
+    
 #pragma mark - Navigation
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -53,6 +64,7 @@
     return nil;
 }
 
+        
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSUInteger index = ((PageContentViewController*) viewController).pageIndex - 1;
     if (pageQnty > index) {
@@ -64,5 +76,6 @@
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     return pageQnty;
 }
+
 
 @end
