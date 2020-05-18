@@ -33,6 +33,8 @@ class TableViewChangeScrollInFeedManual: UIViewController {
     }
     
     override func viewDidLoad() {
+        tableView.estimatedRowHeight = 0;
+        tableView.contentInsetAdjustmentBehavior = .never
         taboolaWidget = taboolaView(mode: TaboolaSection.widget.mode,
                                     placement: TaboolaSection.widget.placement,
                                     scrollIntercept: TaboolaSection.widget.scrollIntercept)
@@ -42,7 +44,7 @@ class TableViewChangeScrollInFeedManual: UIViewController {
         
         taboolaWidget.fetchContent()
     }
-    
+        
     func taboolaView(mode: String, placement: String, scrollIntercept: Bool) -> TaboolaView {
         let taboolaView = TaboolaView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 200))
         taboolaView.delegate = self
@@ -63,6 +65,7 @@ class TableViewChangeScrollInFeedManual: UIViewController {
         taboolaWidget.reset()
         taboolaFeed.reset()
     }
+    
 }
 
 extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewDelegate {
@@ -131,7 +134,9 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
     }
     
     func didEndScrollOfParrentScroll(){
-        let height = tableView.frame.size.height
+        
+        let tableViewFullHeight = tableView.contentSize.height
+        let visibleHeight = tableView.frame.size.height
         var yContentOffset = tableView.contentOffset.y
         
         if #available(iOS 11.0, *) {
@@ -140,26 +145,34 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
             yContentOffset = yContentOffset - tableView.contentInset.bottom
         }
         
-        let distanceFromBotton = tableView.contentSize.height - yContentOffset
-        if distanceFromBotton < height, tableView.isScrollEnabled, tableView.contentSize.height > 0 {
+//        tableView.reloadData()
+//        tableView.invalidateIntrinsicContentSize()
+//        tableView.layoutIfNeeded()
+        
+        let distanceFromBottom = tableViewFullHeight - yContentOffset
+        if distanceFromBottom < visibleHeight, tableView.isScrollEnabled, tableViewFullHeight > 0 {
             tableView.isScrollEnabled = false
             taboolaFeed.scrollEnable = true
         }
     }
+
     
 }
+
+
 
 extension TableViewChangeScrollInFeedManual: TaboolaViewDelegate {
     func taboolaView(_ taboolaView: UIView!, didLoadPlacementNamed placementName: String!, withHeight height: CGFloat) {
         if placementName == TaboolaSection.widget.placement {
             taboolaWidgetHeight = height
-            tableView.beginUpdates()
-            tableView.endUpdates()
             if !didLoadFeed {
                 didLoadFeed = true
                 // We are loading the feed only when the widget finished loading- for dedup.
                 taboolaFeed.fetchContent()
             }
+            tableView.reloadData()
+            tableView.invalidateIntrinsicContentSize()
+            tableView.layoutIfNeeded()
         }
     }
     

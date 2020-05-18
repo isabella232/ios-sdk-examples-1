@@ -131,8 +131,8 @@ extension CollectionViewChangeScrollInFeedManual: UICollectionViewDataSource, UI
             yContentOffset = yContentOffset - collectionView.contentInset.bottom
         }
         
-        let distanceFromBotton = collectionView.contentSize.height - yContentOffset
-        if distanceFromBotton < height, collectionView.isScrollEnabled, collectionView.contentSize.height > 0 {
+        let distanceFromBottom = collectionView.contentSize.height - yContentOffset
+        if distanceFromBottom < height, collectionView.isScrollEnabled, collectionView.contentSize.height > 0 {
             collectionView.isScrollEnabled = false
             taboolaFeed.scrollEnable = true
         }
