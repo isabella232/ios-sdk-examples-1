@@ -105,7 +105,7 @@ class TableViewWidget: UITableViewController {
             
             return taboolaCell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "randomCell", for: indexPath)
             cell.contentView.backgroundColor = UIColor.random
             return cell
         }

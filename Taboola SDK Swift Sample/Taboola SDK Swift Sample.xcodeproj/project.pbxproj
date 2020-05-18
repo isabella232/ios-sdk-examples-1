@@ -16,6 +16,8 @@
 		72BE5CB6238AB10700D2D8AA /* CustomTaboolaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE5CB5238AB10700D2D8AA /* CustomTaboolaView.swift */; };
 		72BE5CB8238AB14B00D2D8AA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE5CB7238AB14B00D2D8AA /* UIView+Extension.swift */; };
 		72BE5CBA238AB18E00D2D8AA /* RandomColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE5CB9238AB18E00D2D8AA /* RandomColorCell.swift */; };
+		72CE04B524729E5900A057DB /* TableViewChangeScrollInFeedManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CE04B424729E5900A057DB /* TableViewChangeScrollInFeedManual.swift */; };
+		72CE04B82472A20B00A057DB /* TaboolaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CE04B72472A20B00A057DB /* TaboolaTableViewCell.swift */; };
 		7FAF72F5C17F34BEF5B7D60A /* Pods_Taboola_SDK_Swift_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73294584A37B6BD8C65BEEF /* Pods_Taboola_SDK_Swift_Sample.framework */; };
 		C4318BBBAF6930D4C737028D /* Pods_TaboolaSDKSwiftSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F656852B0A915FD7DF06EC35 /* Pods_TaboolaSDKSwiftSampleTests.framework */; };
 		DB0B46B123463540007C66B9 /* TaboolaSDKSwiftSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B46B023463540007C66B9 /* TaboolaSDKSwiftSampleTests.swift */; };
@@ -69,6 +71,8 @@
 		72BE5CB5238AB10700D2D8AA /* CustomTaboolaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTaboolaView.swift; sourceTree = "<group>"; };
 		72BE5CB7238AB14B00D2D8AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		72BE5CB9238AB18E00D2D8AA /* RandomColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomColorCell.swift; sourceTree = "<group>"; };
+		72CE04B424729E5900A057DB /* TableViewChangeScrollInFeedManual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewChangeScrollInFeedManual.swift; sourceTree = "<group>"; };
+		72CE04B72472A20B00A057DB /* TaboolaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaboolaTableViewCell.swift; sourceTree = "<group>"; };
 		7D5B03BA65C0E27BAA69F029 /* Pods-TaboolaSDKSwiftSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaboolaSDKSwiftSampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaboolaSDKSwiftSampleTests/Pods-TaboolaSDKSwiftSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		A73294584A37B6BD8C65BEEF /* Pods_Taboola_SDK_Swift_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Taboola_SDK_Swift_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A963269005112E472ED79A21 /* Pods-Taboola SDK Swift Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taboola SDK Swift Sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-Taboola SDK Swift Sample/Pods-Taboola SDK Swift Sample.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +160,14 @@
 			path = "UITableView Constraints";
 			sourceTree = "<group>";
 		};
+		72CE04B62472A1F600A057DB /* TaboolaTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				72CE04B72472A20B00A057DB /* TaboolaTableViewCell.swift */,
+			);
+			path = TaboolaTableViewCell;
+			sourceTree = "<group>";
+		};
 		DB0B46AF23463540007C66B9 /* TaboolaSDKSwiftSampleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +180,9 @@
 		DBCFB6F6225366E200701088 /* UITableView */ = {
 			isa = PBXGroup;
 			children = (
+				72CE04B62472A1F600A057DB /* TaboolaTableViewCell */,
 				DBCFB6F922536ADD00701088 /* TableViewChangeScrollInFeedAuto.swift */,
+				72CE04B424729E5900A057DB /* TableViewChangeScrollInFeedManual.swift */,
 				DBCFB6F7225366F300701088 /* TableViewWidget.swift */,
 			);
 			path = UITableView;
@@ -566,10 +580,12 @@
 				DBCFB6F8225366F300701088 /* TableViewWidget.swift in Sources */,
 				DC157648222ED05900BD63FA /* FetchOnDemandPageViewController.swift in Sources */,
 				72BE5CB4238AAF0100D2D8AA /* TaboolaCellConstraints.swift in Sources */,
+				72CE04B82472A20B00A057DB /* TaboolaTableViewCell.swift in Sources */,
 				DCF03A77223FCD400010FC32 /* CollectionViewChangeScrollInFeedAuto.swift in Sources */,
 				DC15763D222EC7CF00BD63FA /* SplitFeedJsViewController.swift in Sources */,
 				DCF03A72223FCAD00010FC32 /* TaboolaCollectionViewCell.swift in Sources */,
 				DCF03A67223944B10010FC32 /* MidArticleScrollViewController.swift in Sources */,
+				72CE04B524729E5900A057DB /* TableViewChangeScrollInFeedManual.swift in Sources */,
 				72BE5CB6238AB10700D2D8AA /* CustomTaboolaView.swift in Sources */,
 				7213401722E49F3600EBAB2B /* TaboolaCollectionJSViewCell.swift in Sources */,
 				DC15762D222EC02600BD63FA /* ViewController.swift in Sources */,

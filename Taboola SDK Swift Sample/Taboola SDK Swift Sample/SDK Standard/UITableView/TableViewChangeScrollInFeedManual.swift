@@ -1,16 +1,16 @@
 //
-//  CollectionViewChangeScrollInFeedManual.swift
+//  TableViewChangeScrollInFeedManual.swift
 //  Taboola SDK Swift Sample
 //
-//  Created by Roman Slyepko on 3/20/19.
-//  Copyright © 2019 Taboola LTD. All rights reserved.
+//  Created by Liad Elidan on 18/05/2020.
+//  Copyright © 2020 Taboola LTD. All rights reserved.
 //
 
 import UIKit
 import TaboolaSDK
 
-class CollectionViewChangeScrollInFeedManual: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
+class TableViewChangeScrollInFeedManual: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
     var taboolaWidget: TaboolaView!
     var taboolaFeed: TaboolaView!
     var didLoadFeed = false
@@ -65,46 +65,55 @@ class CollectionViewChangeScrollInFeedManual: UIViewController {
     }
 }
 
-extension CollectionViewChangeScrollInFeedManual: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (section == TaboolaSection.widget.index || section == TaboolaSection.feed.index) ? 1 : 3
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let taboolaIdentifier = "TaboolaCell"
-        switch indexPath.section {
-        case TaboolaSection.widget.index:
-            let taboolaCell = collectionView.dequeueReusableCell(withReuseIdentifier: taboolaIdentifier, for: indexPath) as? TaboolaCollectionViewCell ?? TaboolaCollectionViewCell()
-            taboolaCell.contentView.addSubview(taboolaWidget)
-            return taboolaCell
-        case TaboolaSection.feed.index:
-            let taboolaCell = collectionView.dequeueReusableCell(withReuseIdentifier: taboolaIdentifier, for: indexPath) as? TaboolaCollectionViewCell ?? TaboolaCollectionViewCell()
-            taboolaCell.contentView.addSubview(taboolaFeed)
-            return taboolaCell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "randomCell", for: indexPath)
-            cell.contentView.backgroundColor = UIColor.random
-            return cell
-        }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        4
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.section {
         case TaboolaSection.widget.index:
             if taboolaWidgetHeight > 0 {
-                return CGSize(width: view.frame.size.width, height: taboolaWidgetHeight)
+                return taboolaWidgetHeight
             }
             else {
-                return CGSize(width: view.frame.size.width, height: 0)
+                return 0
             }
         case TaboolaSection.feed.index:
-            return CGSize(width: view.frame.size.width, height: TaboolaView.widgetHeight())
+            return TaboolaView.widgetHeight()
         default:
-            return CGSize(width: view.frame.size.width, height: 200)
+            return 200
+        }
+        
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let taboolaIdentifier = "TaboolaCell"
+        switch indexPath.section {
+        case TaboolaSection.widget.index:
+            let taboolaCell = tableView.dequeueReusableCell(withIdentifier: taboolaIdentifier, for: indexPath) as? TaboolaTableViewCell ?? TaboolaTableViewCell()
+            for v in taboolaCell.contentView.subviews {
+                v.removeFromSuperview()
+            }
+            taboolaCell.contentView.addSubview(taboolaWidget)
+            return taboolaCell
+        case TaboolaSection.feed.index:
+            let taboolaCell = tableView.dequeueReusableCell(withIdentifier: taboolaIdentifier, for: indexPath) as? TaboolaTableViewCell ?? TaboolaTableViewCell()
+            for v in taboolaCell.contentView.subviews {
+                v.removeFromSuperview()
+            }
+            taboolaCell.contentView.addSubview(taboolaFeed)
+            return taboolaCell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "randomCell", for: indexPath)
+            cell.contentView.backgroundColor = UIColor.random
+            return cell
         }
     }
     
@@ -112,7 +121,7 @@ extension CollectionViewChangeScrollInFeedManual: UICollectionViewDataSource, UI
         if taboolaFeed.scrollEnable {
             print("did finish scrolling taboola")
             taboolaFeed.scrollEnable = false
-            collectionView.isScrollEnabled = true
+            tableView.isScrollEnabled = true
             taboolaFeed.releaseScroll()
         }
     }
@@ -122,33 +131,30 @@ extension CollectionViewChangeScrollInFeedManual: UICollectionViewDataSource, UI
     }
     
     func didEndScrollOfParrentScroll(){
-        let height = collectionView.frame.size.height
-        var yContentOffset = collectionView.contentOffset.y
+        let height = tableView.frame.size.height
+        var yContentOffset = tableView.contentOffset.y
         
         if #available(iOS 11.0, *) {
-            yContentOffset = yContentOffset - collectionView.adjustedContentInset.bottom
+            yContentOffset = yContentOffset - tableView.adjustedContentInset.bottom
         } else {
-            yContentOffset = yContentOffset - collectionView.contentInset.bottom
+            yContentOffset = yContentOffset - tableView.contentInset.bottom
         }
         
-        let distanceFromBotton = collectionView.contentSize.height - yContentOffset
-        if distanceFromBotton < height, collectionView.isScrollEnabled, collectionView.contentSize.height > 0 {
-            collectionView.isScrollEnabled = false
+        let distanceFromBotton = tableView.contentSize.height - yContentOffset
+        if distanceFromBotton < height, tableView.isScrollEnabled, tableView.contentSize.height > 0 {
+            tableView.isScrollEnabled = false
             taboolaFeed.scrollEnable = true
         }
     }
     
 }
 
-
-
-extension CollectionViewChangeScrollInFeedManual: TaboolaViewDelegate {
-    
-    
+extension TableViewChangeScrollInFeedManual: TaboolaViewDelegate {
     func taboolaView(_ taboolaView: UIView!, didLoadPlacementNamed placementName: String!, withHeight height: CGFloat) {
         if placementName == TaboolaSection.widget.placement {
             taboolaWidgetHeight = height
-            collectionView.collectionViewLayout.invalidateLayout()
+            tableView.beginUpdates()
+            tableView.endUpdates()
             if !didLoadFeed {
                 didLoadFeed = true
                 // We are loading the feed only when the widget finished loading- for dedup.
