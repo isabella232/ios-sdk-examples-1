@@ -14,7 +14,7 @@ class TableViewChangeScrollInFeedManual: UIViewController {
     var taboolaWidget: TaboolaView!
     var taboolaFeed: TaboolaView!
     var didLoadFeed = false
-    
+    var didLoadTaboolaView = false
     var taboolaWidgetHeight: CGFloat = 0.0
     
     lazy var viewId: String = {
@@ -33,8 +33,6 @@ class TableViewChangeScrollInFeedManual: UIViewController {
     }
     
     override func viewDidLoad() {
-        tableView.estimatedRowHeight = 0;
-        tableView.contentInsetAdjustmentBehavior = .never
         taboolaWidget = taboolaView(mode: TaboolaSection.widget.mode,
                                     placement: TaboolaSection.widget.placement,
                                     scrollIntercept: TaboolaSection.widget.scrollIntercept)
@@ -44,7 +42,8 @@ class TableViewChangeScrollInFeedManual: UIViewController {
         
         taboolaWidget.fetchContent()
     }
-        
+
+    
     func taboolaView(mode: String, placement: String, scrollIntercept: Bool) -> TaboolaView {
         let taboolaView = TaboolaView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 200))
         taboolaView.delegate = self
@@ -101,9 +100,6 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
         switch indexPath.section {
         case TaboolaSection.widget.index:
             let taboolaCell = tableView.dequeueReusableCell(withIdentifier: taboolaIdentifier, for: indexPath) as? TaboolaTableViewCell ?? TaboolaTableViewCell()
-            for v in taboolaCell.contentView.subviews {
-                v.removeFromSuperview()
-            }
             taboolaCell.contentView.addSubview(taboolaWidget)
             return taboolaCell
         case TaboolaSection.feed.index:
@@ -112,6 +108,10 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
                 v.removeFromSuperview()
             }
             taboolaCell.contentView.addSubview(taboolaFeed)
+            if !didLoadTaboolaView {
+                didLoadTaboolaView = true
+                taboolaFeed.fetchContent()
+            }
             return taboolaCell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "randomCell", for: indexPath)
@@ -132,7 +132,7 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         didEndScrollOfParrentScroll()
     }
-    
+ 
     func didEndScrollOfParrentScroll(){
         
         let tableViewFullHeight = tableView.contentSize.height
@@ -144,19 +144,15 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
         } else {
             yContentOffset = yContentOffset - tableView.contentInset.bottom
         }
-        
-//        tableView.reloadData()
-//        tableView.invalidateIntrinsicContentSize()
-//        tableView.layoutIfNeeded()
-        
+
         let distanceFromBottom = tableViewFullHeight - yContentOffset
-        if distanceFromBottom < visibleHeight, tableView.isScrollEnabled, tableViewFullHeight > 0 {
+        
+        if distanceFromBottom < visibleHeight, tableView.isScrollEnabled, tableView.contentSize.height > 0 {
+
             tableView.isScrollEnabled = false
             taboolaFeed.scrollEnable = true
         }
     }
-
-    
 }
 
 
@@ -167,12 +163,9 @@ extension TableViewChangeScrollInFeedManual: TaboolaViewDelegate {
             taboolaWidgetHeight = height
             if !didLoadFeed {
                 didLoadFeed = true
-                // We are loading the feed only when the widget finished loading- for dedup.
-                taboolaFeed.fetchContent()
             }
-            tableView.reloadData()
-            tableView.invalidateIntrinsicContentSize()
-            tableView.layoutIfNeeded()
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
     

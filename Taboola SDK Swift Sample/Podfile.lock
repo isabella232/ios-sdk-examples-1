@@ -2,15 +2,15 @@ PODS:
   - TaboolaSDK (2.5.0)
 
 DEPENDENCIES:
-  - TaboolaSDK (from `/Users/liad.e/ios-sdk`)
+  - TaboolaSDK (= 2.5.0)
 
-EXTERNAL SOURCES:
-  TaboolaSDK:
-    :path: "/Users/liad.e/ios-sdk"
+SPEC REPOS:
+  trunk:
+    - TaboolaSDK
 
 SPEC CHECKSUMS:
-  TaboolaSDK: 1323a439751412376ee4bdd132748d0c8019a606
+  TaboolaSDK: bd9b49385fccfdf9ee3d1b3626a10bd868c12200
 
-PODFILE CHECKSUM: c9c07ac730e7820736fcee6589eb31996a37c8aa
+PODFILE CHECKSUM: f436b325cd694982ceaace8db044ff40a6e6a575
 
 COCOAPODS: 1.9.0

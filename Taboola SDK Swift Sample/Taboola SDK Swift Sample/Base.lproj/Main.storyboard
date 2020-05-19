@@ -1382,12 +1382,12 @@
         <!--Table View Change Scroll In Feed Manual-->
         <scene sceneID="0qA-2I-wcq">
             <objects>
-                <viewController id="5Sf-HC-HIt" customClass="TableViewChangeScrollInFeedManual" customModule="Taboola_SDK_Swift_Sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="5Sf-HC-HIt" customClass="TableViewChangeScrollInFeedManual" customModule="Taboola_SDK_Swift_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvJ-7v-WLs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NJP-xF-EWf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NJP-xF-EWf">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -1422,6 +1422,10 @@
                             <constraint firstItem="NJP-xF-EWf" firstAttribute="bottom" secondItem="ZqP-GK-SLz" secondAttribute="bottom" id="6Ej-Ne-gBJ"/>
                             <constraint firstItem="NJP-xF-EWf" firstAttribute="top" secondItem="ZqP-GK-SLz" secondAttribute="top" id="EZY-r9-hah"/>
                             <constraint firstItem="NJP-xF-EWf" firstAttribute="leading" secondItem="ZqP-GK-SLz" secondAttribute="leading" id="ad3-Cl-CqP"/>
+                            <constraint firstItem="NJP-xF-EWf" firstAttribute="top" secondItem="ZqP-GK-SLz" secondAttribute="top" id="fXf-yO-MYn"/>
+                            <constraint firstItem="NJP-xF-EWf" firstAttribute="trailing" secondItem="ZqP-GK-SLz" secondAttribute="trailing" id="pVM-58-FbH"/>
+                            <constraint firstItem="NJP-xF-EWf" firstAttribute="bottom" secondItem="ZqP-GK-SLz" secondAttribute="bottom" id="pvT-v6-5Mz"/>
+                            <constraint firstItem="NJP-xF-EWf" firstAttribute="leading" secondItem="ZqP-GK-SLz" secondAttribute="leading" id="qTS-LR-wzT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZqP-GK-SLz"/>
                     </view>
