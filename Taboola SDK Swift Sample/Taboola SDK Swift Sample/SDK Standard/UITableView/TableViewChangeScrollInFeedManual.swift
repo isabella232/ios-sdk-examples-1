@@ -155,15 +155,10 @@ extension TableViewChangeScrollInFeedManual: UITableViewDataSource, UITableViewD
     }
 }
 
-
-
 extension TableViewChangeScrollInFeedManual: TaboolaViewDelegate {
     func taboolaView(_ taboolaView: UIView!, didLoadPlacementNamed placementName: String!, withHeight height: CGFloat) {
         if placementName == TaboolaSection.widget.placement {
             taboolaWidgetHeight = height
-            if !didLoadFeed {
-                didLoadFeed = true
-            }
             tableView.beginUpdates()
             tableView.endUpdates()
         }
