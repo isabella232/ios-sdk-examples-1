@@ -17,7 +17,8 @@ class TaboolaCell: UITableViewCell {
 class TableViewWidget: UITableViewController {
     
     var didLoadTaboolaView = false
-    
+    var taboolaWidgetHeight: CGFloat = 0.0
+
     var taboolaView = TaboolaView()
 
     override func viewDidLoad() {
@@ -90,7 +91,12 @@ class TableViewWidget: UITableViewController {
 
         switch indexPath.row {
         case 9:
-            return taboolaView.frame.size.height > 0 ? taboolaView.frame.size.height : 20
+            if taboolaWidgetHeight > 0 {
+                return taboolaWidgetHeight
+            }
+            else {
+                return 0
+            }
         default:
             return 200
         }
@@ -118,6 +124,7 @@ extension TableViewWidget: TaboolaViewDelegate {
 
     func taboolaView(_ taboolaView: UIView!, didLoadPlacementNamed placementName: String!, withHeight height: CGFloat) {
         print("did height \(height)")
+        taboolaWidgetHeight = height
         tableView.beginUpdates()
         tableView.endUpdates()
         
