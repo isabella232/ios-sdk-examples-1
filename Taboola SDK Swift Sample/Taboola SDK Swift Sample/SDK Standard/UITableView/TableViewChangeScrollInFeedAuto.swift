@@ -33,7 +33,7 @@ class TableViewChangeScrollInFeedAuto: UITableViewController {
         taboolaView.viewID = viewId
         taboolaView.setInterceptScroll(true)
         //Forcing Dark-Mode
-        taboolaView.setExtraProperties(["darkMode": true])
+        taboolaView.setExtraProperties(["darkMode": false])
     }
 
     // MARK: - Table view data source
