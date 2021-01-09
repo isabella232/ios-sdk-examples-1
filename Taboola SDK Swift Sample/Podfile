@@ -3,11 +3,11 @@
 
 target 'Taboola SDK Swift Sample' do
 use_frameworks!
-pod 'TaboolaSDK', '2.5.0'
+pod 'TaboolaSDK', '2.8.3'
 end
 
 target 'TaboolaSDKSwiftSampleTests' do
 use_frameworks!
-pod 'TaboolaSDK', '2.5.0'
+pod 'TaboolaSDK', '2.8.3'
 
 end
