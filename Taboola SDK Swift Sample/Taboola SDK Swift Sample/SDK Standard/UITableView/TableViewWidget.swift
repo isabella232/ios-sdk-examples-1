@@ -26,14 +26,14 @@ class TableViewWidget: UITableViewController {
         taboolaView = TaboolaView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200))
         taboolaView.delegate = self
         taboolaView.ownerViewController = self
-        taboolaView.mode = "alternating-widget-1x2";
+        taboolaView.mode = "alternating-widget-without-video-1x4";
         taboolaView.publisher = "sdk-tester-demo";
         taboolaView.pageType = "article";
         taboolaView.pageUrl = "http://www.example.com";
         taboolaView.placement = "Below Article";
         taboolaView.targetType = "mix";
         //Forcing Dark-Mode
-        taboolaView.setExtraProperties(["darkMode": true])
+       // taboolaView.setExtraProperties(["darkMode": true])
     }
     
     func setTaboolaView(taboolaCell:TaboolaCell) {
