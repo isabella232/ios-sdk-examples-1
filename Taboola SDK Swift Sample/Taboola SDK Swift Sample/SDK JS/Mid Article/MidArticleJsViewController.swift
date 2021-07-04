@@ -34,7 +34,9 @@ class MidArticleJsViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        TaboolaJS.sharedInstance()?.unregisterWebView(webView, completion: nil)
+        if self.isMovingFromParent || self.isBeingDismissed {
+          TaboolaJS.sharedInstance()?.unregisterWebView(webView, completion: {})
+        }
     }
 }
 
